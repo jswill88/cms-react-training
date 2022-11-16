@@ -1,20 +1,21 @@
 import Image from "next/image";
 import moment from "moment/moment";
-import { Button } from "./Button";
-import { Detail } from "./Detail";
+import { Button, Detail } from "components";
 import styles from "styles/Comic.module.css";
 
 export function Comic(props) {
-	const { title, thumbnail, issueNumber, creators, publishDate } = props;
+	const { title, thumbnail, issueNumber, creators, dates } = props;
 
-	const formattedDate = (date) => {
-		if (!date) return null;
-		return moment(publishDate).format("MMMM Do, YYYY");
+	const formattedDate = (dates) => {
+		if (!dates || !dates.length) return null;
+		const { date } = dates.find(({ type }) => type === "focDate") || dates[0];
+		const formattedDate = moment(date).format("MMMM Do, YYYY");
+		return formattedDate === "Invalid date" ? null : formattedDate;
 	};
 
 	const formattedCreators = (creators) => {
-		if (!creators.length) return null;
-		return creators
+		if (!creators.items.length) return null;
+		return creators.items
 			.map(({ name }) => {
 				const nameArr = name.split(" ");
 				if (nameArr.length === 1) return nameArr[0];
@@ -28,11 +29,11 @@ export function Comic(props) {
 			<div className={styles.topSection}>
 				<div className={styles.imgCont}>
 					<Image
-						placeholder="blur"
 						width={300}
 						height={451}
+						placeholder="blur"
 						blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP08gquBwADNQFojSzfpQAAAABJRU5ErkJggg=="
-						src={thumbnail}
+						src={`${thumbnail.path}.${thumbnail.extension}`}
 						alt={title}
 						className={styles.img}
 					/>
@@ -43,7 +44,7 @@ export function Comic(props) {
 				<h2 className={styles.title}>{title}</h2>
 				<ul>
 					<Detail label="Issue" value={issueNumber} />
-					<Detail label="Published" value={formattedDate(publishDate)} />
+					<Detail label="Published" value={formattedDate(dates)} />
 					<Detail label="Creators" value={formattedCreators(creators)} />
 				</ul>
 			</div>

@@ -1,15 +1,11 @@
 import Head from "next/head";
 import styles from "styles/Home.module.css";
-import getStaticData from "lib/getStaticData";
-import { Comic } from "components";
-
 import { Montserrat, Karla } from "@next/font/google";
 const karla = Karla({ variable: "--karla", subsets: ["latin"] });
 const montserrat = Montserrat({ variable: "--montserrat", subsets: ["latin"] });
+import { ComicGrid } from "components";
 
-export default function Home(props) {
-	const { comics } = props;
-
+export default function Home() {
 	return (
 		<div
 			className={`${styles.container} ${karla.variable} ${montserrat.variable}`}
@@ -20,27 +16,8 @@ export default function Home(props) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<section
-					style={{
-						display: "grid",
-						gridTemplateColumns: "repeat(auto-fill, minmax(183px, 1fr))",
-						gap: "30px 20px",
-					}}
-				>
-					{comics.map((comic) => (
-						<Comic key={comic.id} {...comic} />
-					))}
-				</section>
+				<ComicGrid />
 			</main>
 		</div>
 	);
 }
-
-export const getStaticProps = async () => {
-	const comics = await getStaticData();
-	return {
-		props: {
-			comics,
-		},
-	};
-};
