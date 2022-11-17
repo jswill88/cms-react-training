@@ -3,7 +3,7 @@ import styles from "styles/Home.module.css";
 import { Montserrat, Karla } from "@next/font/google";
 const karla = Karla({ variable: "--karla", subsets: ["latin"] });
 const montserrat = Montserrat({ variable: "--montserrat", subsets: ["latin"] });
-import { ComicGrid } from "components";
+import { ComicGrid } from "../components";
 
 export default function Home() {
 	return (
