@@ -1,6 +1,6 @@
 import styles from "styles/Detail.module.css";
 
-export function Detail(props) {
+export function Detail(props: { label: string, value: string | number }) {
 	const { label, value } = props;
 
 	if (!value || (typeof value === "string" && !value.length)) return null;

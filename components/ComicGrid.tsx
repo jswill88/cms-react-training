@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFetch } from "../hooks";
-import { Comic, ComicGridFallback } from "../components";
-import { FallbackStatus } from "../types"
+import { Comic, ComicGridFallback } from "components";
+import { FallbackStatus, ComicProps } from "../types"
 
 const BASE_URL = `https://gateway.marvel.com/v1/public/comics?apikey=${process.env.apiKey}&limit=15`;
 
@@ -9,21 +9,18 @@ type FallbackText = {
 	[K in FallbackStatus]: string;
 }
 
-type ComicType = {
-	id: string;
-}
-
 const fallbackText: FallbackText = {
 	loading: "Waiting to load comics",
 	error: "Error loading comics",
+	empty: "No comics to show"
 };
 
 export function ComicGrid() {
-	const [offset, setOffset] = useState<Number>(0);
+	const [offset, setOffset] = useState(0);
 
 	const url = `${BASE_URL}&offset=${offset}`;
 
-	const { data, status } = useFetch<ComicType>(url);
+	const { results = [], status } = useFetch<ComicProps>(url);
 
 	if (status in fallbackText) {
 		return <ComicGridFallback>{fallbackText[status]}</ComicGridFallback>;
@@ -37,7 +34,7 @@ export function ComicGrid() {
 				gap: "30px 20px",
 			}}
 		>
-			{data.map((comic) => (
+			{results.map((comic: ComicProps )=> (
 				<Comic key={comic.id} {...comic} />
 			))}
 		</section>

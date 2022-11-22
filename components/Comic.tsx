@@ -2,18 +2,19 @@ import Image from "next/image";
 import moment from "moment/moment";
 import { Button, Detail } from "components";
 import styles from "styles/Comic.module.css";
+import { ComicProps, Date, Creators } from '../types'
 
-export function Comic(props) {
+export function Comic(props: ComicProps) {
 	const { title, thumbnail, issueNumber, creators, dates } = props;
 
-	const formattedDate = (dates) => {
+	const formattedDate = (dates: Date[]): string => {
 		if (!dates || !dates.length) return null;
 		const { date } = dates.find(({ type }) => type === "focDate") || dates[0];
 		const formattedDate = moment(date).format("MMMM Do, YYYY");
 		return formattedDate === "Invalid date" ? null : formattedDate;
 	};
 
-	const formattedCreators = (creators) => {
+	const formattedCreators = (creators: Creators): string => {
 		if (!creators.items.length) return null;
 		return creators.items
 			.map(({ name }) => {
