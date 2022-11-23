@@ -44,9 +44,9 @@ export function Comic(props: ComicProps) {
 			<div>
 				<h2 className={styles.title}>{title}</h2>
 				<ul>
-					<Detail label="Issue" value={issueNumber} />
-					<Detail label="Published" value={formattedDate(dates)} />
-					<Detail label="Creators" value={formattedCreators(creators)} />
+					<Detail label="Issue" value={issueNumber} testId="issue-number" />
+					<Detail label="Published" value={formattedDate(dates)} testId="published-date"/>
+					<Detail label="Creators" value={formattedCreators(creators)} testId="creators" />
 				</ul>
 			</div>
 		</article>
