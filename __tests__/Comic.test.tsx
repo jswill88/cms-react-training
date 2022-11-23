@@ -1,8 +1,9 @@
 import { render } from "@testing-library/react";
 import { Comic } from "components";
+import { ComicProps } from "../types"
 
-
-const testComic = {
+const testComic: ComicProps = {
+	id: "1",
 	title: "Ant-Man (2003) #4",
 	thumbnail: {
 		"path": "http://i.annihil.us/u/prod/marvel/i/mg/4/20/4bc697c680890",

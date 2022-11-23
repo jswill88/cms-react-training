@@ -2,7 +2,7 @@ import Image from "next/image";
 import moment from "moment/moment";
 import { Button, Detail } from "components";
 import styles from "styles/Comic.module.css";
-import { ComicProps, Date, Creators } from '../types'
+import { ComicProps, Date, Creators } from "../types"
 
 export function Comic(props: ComicProps) {
 	const { title, thumbnail, issueNumber, creators, dates } = props;
