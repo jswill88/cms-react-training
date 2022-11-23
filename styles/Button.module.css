@@ -16,6 +16,11 @@
 	box-sizing: border-box;
 }
 
+.favorited {
+	background-color: var(--red);
+	outline: 2px solid var(--off-white);
+}
+
 .icon {
 	color: var(--off-white);
 }

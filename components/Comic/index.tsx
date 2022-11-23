@@ -1,11 +1,28 @@
 import Image from "next/image";
 import moment from "moment/moment";
-import { Button, Detail } from "components";
+import Button from "./Button";
+import Detail from "./Detail";
 import styles from "styles/Comic.module.css";
-import { ComicProps, Date, Creators } from "../types"
+import { ComicProps, Date, Creators } from "../../types";
+import { useGridContext } from "state/GridContext";
 
 export function Comic(props: ComicProps) {
-	const { title, thumbnail, issueNumber, creators, dates } = props;
+	const { id, title, thumbnail, issueNumber, creators, dates } = props;
+
+	const { toggleFavorite, favorites } = useGridContext();
+
+	const handleClick = () => {
+		toggleFavorite({
+			thumbnail: formattedThumbnailPath(thumbnail),
+			title,
+			id,
+			issueNumber,
+		});
+	};
+
+	const formattedThumbnailPath = ({ path, extension }) => {
+		return `${path}/portrait_uncanny.${extension}`;
+	};
 
 	const formattedDate = (dates: Date[]): string => {
 		if (!dates || !dates.length) return null;
@@ -31,22 +48,30 @@ export function Comic(props: ComicProps) {
 				<div className={styles.imgCont}>
 					<Image
 						width={300}
-						height={451}
+						height={450}
 						placeholder="blur"
 						blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP08gquBwADNQFojSzfpQAAAABJRU5ErkJggg=="
-						src={`${thumbnail.path}.${thumbnail.extension}`}
+						src={formattedThumbnailPath(thumbnail)}
 						alt={title}
 						className={styles.img}
 					/>
 				</div>
-				<Button />
+				<Button onClick={handleClick} favorited={id in favorites} />
 			</div>
 			<div>
 				<h2 className={styles.title}>{title}</h2>
 				<ul>
 					<Detail label="Issue" value={issueNumber} testId="issue-number" />
-					<Detail label="Published" value={formattedDate(dates)} testId="published-date"/>
-					<Detail label="Creators" value={formattedCreators(creators)} testId="creators" />
+					<Detail
+						label="Published"
+						value={formattedDate(dates)}
+						testId="published-date"
+					/>
+					<Detail
+						label="Creators"
+						value={formattedCreators(creators)}
+						testId="creators"
+					/>
 				</ul>
 			</div>
 		</article>
