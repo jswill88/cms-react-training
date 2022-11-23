@@ -6,9 +6,9 @@ export function Detail(props: { label: string, value: string | number, testId: s
 	if (!value || (typeof value === "string" && !value.length)) return null;
 
 	return (
-		<li className={styles.container}>
+		<li className={styles.container} data-testid={testId}>
 			<span className={styles.label}>{label}:</span>{" "}
-			<span className={styles.value} data-testid={testId}>{value}</span>
+			<span className={styles.value}>{value}</span>
 		</li>
 	);
 }

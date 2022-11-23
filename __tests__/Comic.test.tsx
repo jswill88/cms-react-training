@@ -31,15 +31,15 @@ const testComic = {
 const expectedRender = [
 	{
 		testId: "issue-number",
-		value: "4",
+		value: "Issue: 4",
 	},
 	{
 		testId: "creators",
-		value: "Crain, Clayton",
+		value: "Creators: Crain, Clayton",
 	},
 	{
 		testId: "published-date",
-		value: "August 4th, 2019",
+		value: "Published: August 4th, 2019",
 	}
 ]
 
