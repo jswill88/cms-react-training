@@ -1,0 +1,58 @@
+.container {
+	position: relative;
+	z-index: 1;
+	background-color: var(--gray-dark);
+	color: var(--off-white);
+}
+
+.buttonBar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.buttonBarButton {
+	background-color: var(--gray-dark);
+	color: var(--off-white);
+	font-size: 14px;
+	line-height: calc(16 / 14);
+	padding: 20px 10px;
+	font-family: var(--montserrat);
+	font-weight: 700;
+	display: flex;
+	gap: 5px;
+	cursor: pointer;
+}
+
+.filterFavoritesCont {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	pointer-events: none;
+	transition: opacity var(--transition);
+	background-color: var(--gray-dark);
+	color: var(--off-white);
+	opacity: 0;
+	width: 100%;
+}
+
+.show {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.bottomButton {
+	width: 100%;
+	background-color: var(--red);
+	color: var(--off-white);
+	font-family: var(--montserrat);
+	font-weight: 700;
+	font-size: 14px;
+	line-height: calc(16 / 14);
+	padding: 11px;
+}
+
+@media (min-width: 64em) {
+	.container {
+		display: none;
+	}
+}

@@ -1,14 +1,13 @@
 .container {
 	--size: 30px;
-
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-	display: grid;
-	place-items: center;
 	width: var(--size);
 	height: var(--size);
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: grid;
+	place-items: center;
 	background-color: var(--gray-dark);
 	border-radius: 50%;
 	cursor: pointer;
@@ -33,5 +32,14 @@
 
 	.container:hover:before {
 		transform: scale(2);
+	}
+}
+
+@media (min-width: 40em) {
+	.container {
+		top: unset;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 }

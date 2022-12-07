@@ -1,5 +1,6 @@
-import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PagerButton from "./PagerButton";
+import styles from "styles/Pager.module.css";
 
 type Props = {
 	offset: number;
@@ -8,6 +9,7 @@ type Props = {
 };
 
 export function Pager({ offset, total, setOffset }: Props) {
+	if (!total) return null;
 	const firstItem = offset + 1;
 	const lastItem = Math.min(offset + 15, total);
 
@@ -22,12 +24,16 @@ export function Pager({ offset, total, setOffset }: Props) {
 	};
 
 	return (
-		<div>
-			<PagerButton onClick={() => handleOffset(false)} />
-			<span>
+		<div className={styles.container}>
+			<PagerButton onClick={() => handleOffset(false)}>
+				<FontAwesomeIcon icon="angle-left" />
+			</PagerButton>
+			<span className={styles.text}>
 				{firstItem}-{lastItem} of {total}
 			</span>
-			<PagerButton onClick={() => handleOffset(true)} />
+			<PagerButton onClick={() => handleOffset(true)}>
+				<FontAwesomeIcon icon="angle-right" />
+			</PagerButton>
 		</div>
 	);
 }

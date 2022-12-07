@@ -1,5 +1,7 @@
 /* Variables */
 :root {
+	--black: #000;
+	--white: #fff;
 	--red: #c24868;
 	--gray-dark: #222;
 	--off-white: #f8f8f2;
@@ -22,6 +24,7 @@ a {
 
 button {
 	border: none;
+	cursor: pointer;
 }
 
 img {

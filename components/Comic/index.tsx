@@ -4,16 +4,16 @@ import Button from "./Button";
 import Detail from "./Detail";
 import styles from "styles/Comic.module.css";
 import { ComicProps, Date, Creators } from "../../types";
-import { useGridContext } from "state/GridContext";
+import { useAppContext } from "state/AppContext";
 
 export function Comic(props: ComicProps) {
 	const { id, title, thumbnail, issueNumber, creators, dates } = props;
 
-	const { toggleFavorite, favorites } = useGridContext();
+	const { toggleFavorite, favorites } = useAppContext();
 
 	const handleClick = () => {
 		toggleFavorite({
-			thumbnail: formattedThumbnailPath(thumbnail),
+			thumbnail,
 			title,
 			id,
 			issueNumber,
@@ -43,7 +43,7 @@ export function Comic(props: ComicProps) {
 	};
 
 	return (
-		<article>
+		<article className={styles.container}>
 			<div className={styles.topSection}>
 				<div className={styles.imgCont}>
 					<Image

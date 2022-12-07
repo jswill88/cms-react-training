@@ -1,11 +1,13 @@
+import { useAppContext } from "state/AppContext";
+import styles from "styles/Filter.module.css";
+
 type Props = {
 	name: string;
 	options: { name: string; value: string }[];
-	filter: string[];
-	setFilter: ([]) => void;
 };
 
-export default function Filter({ name, options, setFilter, filter }: Props) {
+export default function Filter({ name, options }: Props) {
+	const { filter, setFilter } = useAppContext();
 	const [selectedFilterName, selectedFilterValue] = filter;
 	const formattedFilterName = (name) => `/${name}s`;
 
@@ -27,6 +29,7 @@ export default function Filter({ name, options, setFilter, filter }: Props) {
 					? selectedFilterValue
 					: ""
 			}
+			className={styles.container}
 		>
 			<option value="">{name}</option>
 			{options.map(({ name, value }) => (

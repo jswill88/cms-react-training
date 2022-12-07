@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: var(--gray-dark);
+	color: var(--off-white);
+	font-family: var(--montserrat);
+	font-size: 14px;
+	line-height: calc(16 / 14);
+	text-align: center;
+	padding: 28px 20px 40px;
+	gap: 18px;
+}
+
+.link {
+	text-decoration: underline;
+}
+
+.imgCont {
+	width: 106px;
+	margin-bottom: 8px;
+}
+
+@media (min-width: 64em) {
+	.container {
+		padding-bottom: 52px;
+	}
+}

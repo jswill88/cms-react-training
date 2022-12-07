@@ -1,10 +1,12 @@
 import styles from "styles/Detail.module.css";
 
-export default function Detail(props: {
+type Props = {
 	label: string;
 	value: string | number;
 	testId: string;
-}) {
+};
+
+export default function Detail(props: Props) {
 	const { label, value, testId } = props;
 
 	if (!value || (typeof value === "string" && !value.length)) return null;

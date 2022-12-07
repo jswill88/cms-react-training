@@ -10,6 +10,7 @@ const nextConfig = {
 			},
 		],
 		formats: ["image/avif", "image/webp"],
+		deviceSizes: [640, 1024, 1440, 1920],
 	},
 	env: {
 		apiKey: "537c2a055f0aa0541bb7bd3939d55c7f",
