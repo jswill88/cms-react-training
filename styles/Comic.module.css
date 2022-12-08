@@ -1,0 +1,38 @@
+.topSection {
+	position: relative;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+
+.imgCont {
+	aspect-ratio: 125/188;
+	display: block;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	box-shadow: 0px 5px 15px #00000029;
+}
+
+.img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	object-fit: cover;
+	height: 100%;
+}
+
+.title {
+	font-family: var(--montserrat);
+	font-size: 16px;
+	line-height: calc(19 / 16);
+	font-weight: 700;
+	color: var(--gray-dark);
+	margin-bottom: 10px;
+}
+
+@media (min-width: 64em) {
+	.title {
+		font-size: 18px;
+		line-height: calc(22 / 18);
+	}
+}

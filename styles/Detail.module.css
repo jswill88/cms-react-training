@@ -1,0 +1,16 @@
+.container + .container {
+	margin-top: 5px;
+}
+
+.value,
+.label {
+	display: inline-block;
+	color: var(--gray-dark);
+	font-size: 16px;
+	line-height: calc(19 / 16);
+	font-family: var(--karla);
+}
+
+.label {
+	font-weight: 700;
+}
