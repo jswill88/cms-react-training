@@ -9,3 +9,4 @@ export * from "./HeroImage";
 export * from "./AccessibleHider";
 export * from "./IntroPanel";
 export * from "./Footer";
+export * from "./Dropdown";

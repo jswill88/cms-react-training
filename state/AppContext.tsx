@@ -13,7 +13,7 @@ export default function AppContextProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	if (!global.window) return <>{children}</>;
+	if (typeof window === undefined) return <>{children}</>;
 
 	const { getLocal, setLocal } = useLocalStorage("favorites");
 	const [favorites, setFavorites] = useState(null);

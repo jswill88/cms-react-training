@@ -23,21 +23,19 @@
 	cursor: pointer;
 }
 
-.filterFavoritesCont {
+.dropdownOuter {
 	position: absolute;
 	top: 100%;
 	left: 0;
 	pointer-events: none;
-	transition: opacity var(--transition);
-	background-color: var(--gray-dark);
-	color: var(--off-white);
-	opacity: 0;
+	overflow: hidden;
 	width: 100%;
 }
 
-.show {
-	opacity: 1;
-	pointer-events: all;
+.filterFavoritesCont {
+	background-color: var(--gray-dark);
+	color: var(--off-white);
+	width: 100%;
 }
 
 .bottomButton {

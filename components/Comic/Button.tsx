@@ -1,5 +1,6 @@
 import styles from "styles/Button.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useAppContext } from "state/AppContext";
 
 type Props = {
 	onClick: () => void;
@@ -7,9 +8,12 @@ type Props = {
 };
 
 export default function Button({ onClick, favorited }: Props) {
+	const { favorites } = useAppContext();
 	return (
 		<button
-			className={`${styles.container} ${favorited ? styles.favorited : ""}`}
+			className={`${styles.container} ${favorited ? styles.favorited : ""} ${
+				Object.keys(favorites).length < 10 ? styles.hover : ""
+			}`}
 			onClick={onClick}
 		>
 			<FontAwesomeIcon icon="bolt" className={styles.icon}></FontAwesomeIcon>

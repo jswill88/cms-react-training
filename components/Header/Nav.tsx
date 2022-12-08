@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "styles/Nav.module.css";
-import { AccessibleHider } from "components/AccessibleHider";
+import { AccessibleHider } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Nav() {

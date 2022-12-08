@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FilterForm, Favorites, AccessibleHider } from "components";
+import { FilterForm, Favorites, Dropdown } from "components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "styles/MobileFilterBar.module.css";
 
@@ -30,12 +30,7 @@ export function MobileFilterBar() {
 					<FontAwesomeIcon icon="bolt" />
 				</button>
 			</div>
-			<AccessibleHider
-				className={`${styles.filterFavoritesCont} ${
-					displayState === "filter" ? styles.show : ""
-				}`}
-				active={displayState === "filter"}
-			>
+			<Dropdown show={displayState === "filter"} containerStyles={styles.filterFavoritesCont}>
 				<FilterForm />
 				<button
 					onClick={() => handleClick("filter")}
@@ -43,13 +38,8 @@ export function MobileFilterBar() {
 				>
 					Hide Filter <FontAwesomeIcon icon="filter" />
 				</button>
-			</AccessibleHider>
-			<AccessibleHider
-				className={`${styles.filterFavoritesCont} ${
-					displayState === "favorites" ? styles.show : ""
-				}`}
-				active={displayState === "favorites"}
-			>
+			</Dropdown>
+			<Dropdown show={displayState === "favorites"} containerStyles={styles.filterFavoritesCont}>
 				<Favorites />
 				<button
 					onClick={() => handleClick("favorites")}
@@ -57,7 +47,7 @@ export function MobileFilterBar() {
 				>
 					Hide Favorites <FontAwesomeIcon icon="bolt" />
 				</button>
-			</AccessibleHider>
+			</Dropdown>
 		</div>
 	);
 }
