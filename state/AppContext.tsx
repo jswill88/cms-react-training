@@ -21,7 +21,10 @@ export default function AppContextProvider({
 
 	const addFavorite = (obj) => {
 		if (favorites && Object.keys(favorites).length >= 10) return;
-		setFavorites((curr) => ({ ...curr, [obj.id]: obj }));
+		setFavorites((curr) => {
+			if (curr === null) return { [obj.id]: obj }
+			return { ...curr, [obj.id]: obj }
+		});
 	};
 
 	const deleteFavorite = (id) => {
@@ -40,7 +43,7 @@ export default function AppContextProvider({
 	};
 
 	useEffect(() => {
-		setFavorites(getLocal());
+		setFavorites(getLocal() || {});
 	}, []);
 
 	useEffect(() => {
