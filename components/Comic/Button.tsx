@@ -12,7 +12,7 @@ export default function Button({ onClick, favorited }: Props) {
 	return (
 		<button
 			className={`${styles.container} ${favorited ? styles.favorited : ""} ${
-				Object.keys(favorites).length < 10 ? styles.hover : ""
+				Object.keys(favorites ? favorites : {}).length < 10 ? styles.hover : ""
 			}`}
 			onClick={onClick}
 		>
