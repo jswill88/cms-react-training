@@ -1,0 +1,32 @@
+.container {
+	--size: 30px;
+
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	display: grid;
+	place-items: center;
+	width: var(--size);
+	height: var(--size);
+	background-color: var(--gray-dark);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color var(--transition), border-color var(--transition);
+	box-sizing: border-box;
+}
+
+.icon {
+	color: var(--off-white);
+}
+
+@media (hover: hover) {
+	.container:hover {
+		outline: 2px solid var(--off-white);
+		background-color: var(--red);
+	}
+
+	.container:hover:before {
+		transform: scale(2);
+	}
+}
