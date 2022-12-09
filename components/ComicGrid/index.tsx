@@ -2,16 +2,25 @@ import { useState, useEffect } from "react";
 import { useFetch } from "hooks";
 import { Pager, FilterForm, Favorites, MobileFilterBar } from "components";
 import Grid from "./Grid";
-import { ComicProps } from "../../types";
+import { ComicProps, BuildProps } from "../../types";
 import { useAppContext } from "state/AppContext";
 import styles from "styles/ComicGrid.module.css";
 
 const BASE_URL_START = "https://gateway.marvel.com/v1/public";
 const BASE_URL_END = `/comics?apikey=${process.env.apiKey}&limit=15`;
 
-export function ComicGrid() {
+export function ComicGrid({
+	buildComics,
+	buildTotal,
+	buildStatus,
+}: BuildProps) {
 	const [offset, setOffset] = useState(0);
 	const { filter } = useAppContext();
+	const useBuildData =
+		!(offset || filter.length) &&
+		buildComics &&
+		buildTotal &&
+		buildStatus === "success";
 
 	useEffect(() => setOffset(0), [filter]);
 
@@ -28,8 +37,15 @@ export function ComicGrid() {
 				<div className={styles.hideMobile}>
 					<FilterForm />
 				</div>
-				<Grid results={results} status={status} />
-				<Pager offset={offset} total={total} setOffset={setOffset} />
+				<Grid
+					results={useBuildData ? buildComics : results}
+					status={useBuildData ? undefined : status}
+				/>
+				<Pager
+					offset={offset}
+					total={useBuildData ? buildTotal : total}
+					setOffset={setOffset}
+				/>
 			</div>
 			<div className={styles.hideMobile}>
 				<Favorites />

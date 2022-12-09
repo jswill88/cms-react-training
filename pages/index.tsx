@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "styles/Home.module.css";
+import md5 from "md5";
 import { Montserrat, Karla } from "@next/font/google";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import {
@@ -9,10 +10,11 @@ import {
 	faAngleLeft,
 	faAngleRight,
 	faBars,
-	faAngleDown
+	faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { ComicGrid, Header, HeroImage, IntroPanel, Footer } from "components";
 import AppContextProvider from "state/AppContext";
+import { ComicProps, BuildProps } from "types";
 // Using this syntax, because error is caused using other syntax for whatever reason
 const { library, config } = require("@fortawesome/fontawesome-svg-core");
 
@@ -20,9 +22,21 @@ const karla = Karla({ variable: "--karla", subsets: ["latin"] });
 const montserrat = Montserrat({ variable: "--montserrat", subsets: ["latin"] });
 
 config.autoAddCss = false;
-library.add(faBolt, faFilter, faTimes, faAngleLeft, faAngleRight, faBars, faAngleDown);
+library.add(
+	faBolt,
+	faFilter,
+	faTimes,
+	faAngleLeft,
+	faAngleRight,
+	faBars,
+	faAngleDown
+);
 
-export default function Home() {
+export default function Home({
+	buildComics,
+	buildTotal,
+	buildStatus,
+}: BuildProps) {
 	return (
 		<div
 			className={`${styles.container} ${karla.variable} ${montserrat.variable}`}
@@ -37,10 +51,48 @@ export default function Home() {
 				<HeroImage />
 				<main className={styles.main}>
 					<IntroPanel />
-					<ComicGrid />
+					<ComicGrid
+						buildComics={buildComics}
+						buildTotal={buildTotal}
+						buildStatus={buildStatus}
+					/>
 				</main>
 				<Footer />
 			</AppContextProvider>
 		</div>
 	);
 }
+
+export const getStaticProps = async () => {
+	const BASE_URL_START = "https://gateway.marvel.com/v1/public/comics";
+	const privateKey = process.env.MARVEL_PRIVATE_KEY;
+	const apikey = process.env.apiKey;
+	const ts = Date.now().toString();
+	const hash = md5(ts + privateKey + apikey);
+	let status: "error" | "success";
+
+	let params = new URLSearchParams({
+		ts,
+		apikey,
+		hash,
+		limit: "15",
+	});
+
+	const url = `${BASE_URL_START}?${params}`;
+
+	const res = await fetch(url);
+	const data: {
+		data?: { results: ComicProps[]; total: number };
+		status?: string;
+	} = await res.json();
+
+	status = data.status === "Ok" ? "success" : "error";
+
+	return {
+		props: {
+			buildComics: data?.data?.results || null,
+			buildTotal: data?.data?.total || null,
+			buildStatus: status,
+		},
+	};
+};
