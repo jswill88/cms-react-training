@@ -22,46 +22,48 @@ export function Favorites() {
 		return `${path}/portrait_small.${extension}`;
 	};
 
-	if (!favoritesArr.length) return null;
-
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.title}>Favorites</h3>
-			<div className={styles.cards}>
-				{transitions(({ opacity, marginBottom }, item?: ComicProps) => (
-					<animated.div
-						className={styles.card}
-						style={{
-							opacity: opacity.to({ range: [0, 1], output: [0, 1] }),
-							marginBottom: marginBottom.to({
-								range: [0, 1],
-								output: ["0", "-300px"],
-							}),
-						}}
-					>
-						<button
-							onClick={() => toggleFavorite({ id: item.id })}
-							className={styles.button}
+			{favoritesArr.length ? (
+				<div className={styles.cards}>
+					{transitions(({ opacity, marginBottom }, item?: ComicProps) => (
+						<animated.div
+							className={styles.card}
+							style={{
+								opacity: opacity.to({ range: [0, 1], output: [0, 1] }),
+								marginBottom: marginBottom.to({
+									range: [0, 1],
+									output: ["0", "-300px"],
+								}),
+							}}
 						>
-							<FontAwesomeIcon icon="times" />
-						</button>
-						<div className={styles.imgCont}>
-							<ImageWithBlur
-								src={formattedThumbnailPath(item.thumbnail)}
-								alt={item.title}
-								width={50}
-								height={75}
-							/>
-						</div>
-						<div>
-							<h3 className={styles.cardTitle}>{item.title}</h3>
-							{item.issueNumber ? (
-								<p className={styles.issue}>Issue: {item.issueNumber}</p>
-							) : null}
-						</div>
-					</animated.div>
-				))}
-			</div>
+							<button
+								onClick={() => toggleFavorite({ id: item.id })}
+								className={styles.button}
+							>
+								<FontAwesomeIcon icon="times" />
+							</button>
+							<div className={styles.imgCont}>
+								<ImageWithBlur
+									src={formattedThumbnailPath(item.thumbnail)}
+									alt={item.title}
+									width={50}
+									height={75}
+								/>
+							</div>
+							<div>
+								<h3 className={styles.cardTitle}>{item.title}</h3>
+								{item.issueNumber ? (
+									<p className={styles.issue}>Issue: {item.issueNumber}</p>
+								) : null}
+							</div>
+						</animated.div>
+					))}
+				</div>
+			) : (
+				<p className={styles.emptyMessage}>Select comics to save!</p>
+			)}
 		</div>
 	);
 }

@@ -17,6 +17,11 @@
 	padding-inline: 17px;
 }
 
+.emptyMessage {
+	font-family: var(--karla);
+	padding-inline: 17px;
+}
+
 .cards {
 	display: grid;
 }
