@@ -1,13 +1,10 @@
-import Image from "next/image";
-import logo from "assets/logo.png";
+import { Logo } from "components/Logo";
 import styles from "styles/Footer.module.css";
 
 export function Footer() {
 	return (
 		<footer className={styles.container}>
-			<div className={styles.imgCont}>
-				<Image src={logo} width={106} height={106} alt="Comic Closet" />
-			</div>
+			<Logo containerStyles={styles.logo} />
 			<div className={styles.links}>
 				<a
 					href="https://privacy.thewaltdisneycompany.com/en/"
