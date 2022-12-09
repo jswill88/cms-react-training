@@ -13,7 +13,6 @@ export function HeroImage() {
 					height={650}
 					alt="Room of marvel comics"
 					className={styles.heroImage}
-					placeholder="blur"
 				/>
 			</div>
 			<h1 className={styles.title}>Comic Closet</h1>
@@ -24,7 +23,6 @@ export function HeroImage() {
 				alt=""
 				aria-hidden="true"
 				className={styles.decoration}
-				placeholder="blur"
 			/>
 		</div>
 	);

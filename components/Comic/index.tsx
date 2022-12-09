@@ -1,7 +1,7 @@
-import Image from "next/image";
 import moment from "moment/moment";
 import Button from "./Button";
 import Detail from "./Detail";
+import { ImageWithBlur } from "components";
 import styles from "styles/Comic.module.css";
 import { ComicProps, Date, Creators } from "../../types";
 import { useAppContext } from "state/AppContext";
@@ -46,11 +46,9 @@ export function Comic(props: ComicProps) {
 		<article className={styles.container}>
 			<div className={styles.topSection}>
 				<div className={styles.imgCont}>
-					<Image
+					<ImageWithBlur
 						width={300}
 						height={450}
-						placeholder="blur"
-						blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP08gquBwADNQFojSzfpQAAAABJRU5ErkJggg=="
 						src={formattedThumbnailPath(thumbnail)}
 						alt={title}
 						className={styles.img}

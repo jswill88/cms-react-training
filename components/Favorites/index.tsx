@@ -1,21 +1,21 @@
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppContext } from "state/AppContext";
+import { ImageWithBlur } from "components";
 import { ComicProps } from "types";
 import styles from "styles/Favorites.module.css";
-import { animated, useTransition } from 'react-spring';
+import { animated, useTransition } from "react-spring";
 
 export function Favorites() {
 	const { favorites, toggleFavorite } = useAppContext();
 	const favoritesArr: ComicProps[] = Object.values(favorites);
 
 	const transitions = useTransition(favoritesArr, {
-		from: { opacity: 0, life: '0%', marginBottom: .2 },
+		from: { opacity: 0, life: "0%", marginBottom: 0.2 },
 		enter: { opacity: 1, marginBottom: 0 },
 		leave: { opacity: 0, marginBottom: 1 },
 		keys: ({ id }) => id,
-		sort: (a, b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1,
-	})
+		sort: (a, b) => (a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1),
+	});
 
 	const formattedThumbnailPath = ({ path, extension }) => {
 		if (!(path && extension)) return "";
@@ -28,12 +28,15 @@ export function Favorites() {
 		<div className={styles.container}>
 			<h3 className={styles.title}>Favorites</h3>
 			<div className={styles.cards}>
-				{transitions(({opacity, marginBottom}, item?: ComicProps) => (
+				{transitions(({ opacity, marginBottom }, item?: ComicProps) => (
 					<animated.div
 						className={styles.card}
 						style={{
-							opacity: opacity.to({ range: [0,1], output: [0,1]}),
-							marginBottom: marginBottom.to({ range: [0,1], output: ['0','-300px']})
+							opacity: opacity.to({ range: [0, 1], output: [0, 1] }),
+							marginBottom: marginBottom.to({
+								range: [0, 1],
+								output: ["0", "-300px"],
+							}),
 						}}
 					>
 						<button
@@ -43,7 +46,7 @@ export function Favorites() {
 							<FontAwesomeIcon icon="times" />
 						</button>
 						<div className={styles.imgCont}>
-							<Image
+							<ImageWithBlur
 								src={formattedThumbnailPath(item.thumbnail)}
 								alt={item.title}
 								width={50}
