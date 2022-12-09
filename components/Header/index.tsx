@@ -17,7 +17,7 @@ export function Header() {
 				<Nav />
 				<Link href="#favorites" className={styles.favorites}>
 					<FontAwesomeIcon icon="bolt" /> <span>My Favorites</span>{" "}
-					{favorites ? "(" + Object.keys(favorites).length + ")" : ""}
+					({Object.keys(favorites).length})
 				</Link>
 			</div>
 		</header>

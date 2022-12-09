@@ -9,6 +9,7 @@ import {
 	faAngleLeft,
 	faAngleRight,
 	faBars,
+	faAngleDown
 } from "@fortawesome/free-solid-svg-icons";
 import { ComicGrid, Header, HeroImage, IntroPanel, Footer } from "components";
 import AppContextProvider from "state/AppContext";
@@ -19,7 +20,7 @@ const karla = Karla({ variable: "--karla", subsets: ["latin"] });
 const montserrat = Montserrat({ variable: "--montserrat", subsets: ["latin"] });
 
 config.autoAddCss = false;
-library.add(faBolt, faFilter, faTimes, faAngleLeft, faAngleRight, faBars);
+library.add(faBolt, faFilter, faTimes, faAngleLeft, faAngleRight, faBars, faAngleDown);
 
 export default function Home() {
 	return (

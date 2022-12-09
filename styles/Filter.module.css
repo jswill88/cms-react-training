@@ -1,4 +1,9 @@
 .container {
+	position: relative;
+	margin-top: 10px;
+}
+
+.select {
 	display: block;
 	width: 245px;
 	border-radius: 3px;
@@ -8,9 +13,21 @@
 	font-family: var(--karla);
 	font-size: 16px;
 	line-height: 1;
-	padding: 5px 10px 4px;
-	margin-top: 10px;
+	padding: 7px 10px;
 	cursor: pointer;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.icon {
+	color: var(--off-white);
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 14px;
 }
 
 @media (min-width: 64em) {

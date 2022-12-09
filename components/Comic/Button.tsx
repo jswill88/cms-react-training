@@ -8,11 +8,12 @@ type Props = {
 };
 
 export default function Button({ onClick, favorited }: Props) {
-	const { favorites }:{ favorites: null|{} } = useAppContext();
+	const { favorites }:{ favorites: {} } = useAppContext();
+
 	return (
 		<button
 			className={`${styles.container} ${favorited ? styles.favorited : ""} ${
-				Object.keys(favorites ? favorites : {}).length < 10 ? styles.hover : ""
+				Object.keys(favorites).length < 10 ? styles.hover : ""
 			}`}
 			onClick={onClick}
 		>

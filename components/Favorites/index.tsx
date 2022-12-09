@@ -7,7 +7,7 @@ import { animated, useTransition } from 'react-spring';
 
 export function Favorites() {
 	const { favorites, toggleFavorite } = useAppContext();
-	const favoritesArr: ComicProps[] = favorites ? Object.values(favorites) : [];
+	const favoritesArr: ComicProps[] = Object.values(favorites);
 
 	const transitions = useTransition(favoritesArr, {
 		from: { opacity: 0, life: '0%', marginBottom: .2 },

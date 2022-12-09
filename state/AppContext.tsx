@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocalStorage } from "hooks";
 
+type Props = { children: React.ReactNode }
+
 const AppContext = createContext({
 	favorites: {},
 	toggleFavorite: ({}) => {},
@@ -8,19 +10,14 @@ const AppContext = createContext({
 	setFilter: ([]) => {},
 });
 
-export default function AppContextProvider({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	if (typeof window === undefined) return <>{children}</>;
-
+export default function AppContextProvider({ children }: Props) {
 	const { getLocal, setLocal } = useLocalStorage("favorites");
-	const [favorites, setFavorites] = useState(null);
+	const [favorites, setFavorites] = useState({});
 	const [filter, setFilter] = useState([]);
+	const [loaded, setLoaded] = useState(false)
 
 	const addFavorite = (obj) => {
-		if (favorites && Object.keys(favorites).length >= 10) return;
+		if (Object.keys(favorites).length >= 10) return;
 		setFavorites((curr) => {
 			if (curr === null) return { [obj.id]: obj }
 			return { ...curr, [obj.id]: obj }
@@ -44,13 +41,14 @@ export default function AppContextProvider({
 
 	useEffect(() => {
 		setFavorites(getLocal() || {});
+		setLoaded(true)
 	}, []);
 
 	useEffect(() => {
-		if (favorites) {
+		if (favorites && loaded) {
 			setLocal(favorites);
 		}
-	}, [favorites]);
+	}, [favorites, loaded]);
 
 	const state = {
 		favorites,

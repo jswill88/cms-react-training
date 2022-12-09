@@ -56,7 +56,7 @@ export function Comic(props: ComicProps) {
 						className={styles.img}
 					/>
 				</div>
-				<Button onClick={handleClick} favorited={favorites && id in favorites} />
+				<Button onClick={handleClick} favorited={id in favorites} />
 			</div>
 			<div>
 				<h2 className={styles.title}>{title}</h2>

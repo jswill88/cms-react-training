@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAppContext } from "state/AppContext";
 import styles from "styles/Filter.module.css";
 
@@ -20,23 +21,26 @@ export default function Filter({ name, options }: Props) {
 	};
 
 	return (
-		<select
-			name={name}
-			id=""
-			onChange={handleChange}
-			value={
-				selectedFilterName === formattedFilterName(name)
-					? selectedFilterValue
-					: ""
-			}
-			className={styles.container}
-		>
-			<option value="">{name}</option>
-			{options.map(({ name, value }) => (
-				<option value={value} key={value}>
-					{name}
-				</option>
-			))}
-		</select>
+		<div className={styles.container}>
+			<select
+				name={name}
+				id=""
+				onChange={handleChange}
+				value={
+					selectedFilterName === formattedFilterName(name)
+						? selectedFilterValue
+						: ""
+				}
+				className={styles.select}
+			>
+				<option value="">{name}</option>
+				{options.map(({ name, value }) => (
+					<option value={value} key={value}>
+						{name}
+					</option>
+				))}
+			</select>
+			<FontAwesomeIcon icon="angle-down" className={styles.icon}/>
+		</div>
 	);
 }
