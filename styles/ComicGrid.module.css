@@ -13,6 +13,12 @@
 	display: none;
 }
 
+.spinner {
+	width: 116px;
+	display: block;
+	margin: 0 auto;
+}
+
 @media (min-width: 40em) {
 	.cardGrid {
 		grid-template-columns: repeat(auto-fill, minmax(183px, 1fr));
