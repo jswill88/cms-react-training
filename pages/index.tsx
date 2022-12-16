@@ -3,6 +3,7 @@ import styles from "styles/Home.module.css";
 import md5 from "md5";
 import { Montserrat, Karla } from "@next/font/google";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { CREATORS, CHARACTERS } from "lib/filterData";
 import {
 	faBolt,
 	faFilter,
@@ -14,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { ComicGrid, Header, HeroImage, IntroPanel, Footer } from "components";
 import AppContextProvider from "state/AppContext";
-import { ComicProps, BuildProps } from "types";
+import { BuildDataProps, FetchFull } from "types";
 // Using this syntax, because error is caused using other syntax for whatever reason
 const { library, config } = require("@fortawesome/fontawesome-svg-core");
 
@@ -32,11 +33,7 @@ library.add(
 	faAngleDown
 );
 
-export default function Home({
-	buildComics,
-	buildTotal,
-	buildStatus,
-}: BuildProps) {
+export default function Home({ buildData }: BuildDataProps) {
 	return (
 		<div
 			className={`${styles.container} ${karla.variable} ${montserrat.variable}`}
@@ -51,11 +48,7 @@ export default function Home({
 				<HeroImage />
 				<main className={styles.main}>
 					<IntroPanel />
-					<ComicGrid
-						buildComics={buildComics}
-						buildTotal={buildTotal}
-						buildStatus={buildStatus}
-					/>
+					<ComicGrid buildData={buildData} />
 				</main>
 				<Footer />
 			</AppContextProvider>
@@ -64,12 +57,13 @@ export default function Home({
 }
 
 export const getStaticProps = async () => {
-	const BASE_URL_START = "https://gateway.marvel.com/v1/public/comics";
+	const BASE_URL_START = "https://gateway.marvel.com/v1/public";
+	const BASE_URL_END = `/comics`;
+
 	const privateKey = process.env.MARVEL_PRIVATE_KEY;
 	const apikey = process.env.apiKey;
 	const ts = Date.now().toString();
 	const hash = md5(ts + privateKey + apikey);
-	let status: "error" | "success";
 
 	let params = new URLSearchParams({
 		ts,
@@ -78,21 +72,62 @@ export const getStaticProps = async () => {
 		limit: "15",
 	});
 
-	const url = `${BASE_URL_START}?${params}`;
+	const allData = {
+		creators: {},
+		characters: {},
+	};
 
-	const res = await fetch(url);
-	const data: {
-		data?: { results: ComicProps[]; total: number };
-		status?: string;
-	} = await res.json();
+	type Filters = {
+		[K in "creators" | "characters"]: {
+			name: string;
+			value: string;
+			url?: string;
+		}[];
+	};
 
-	status = data.status === "Ok" ? "success" : "error";
+	let filters: Filters = {
+		creators: CREATORS,
+		characters: CHARACTERS,
+	};
+
+	for (let key in filters) {
+		filters[key] = filters[key].map((obj) => ({
+			...obj,
+			url: `${BASE_URL_START}/${key}/${obj.value}/${BASE_URL_END}?${params}`,
+		}));
+	}
+
+	const fetchData = (url, filterType, value?) => {
+		return new Promise<void>(async (resolve, reject) => {
+			try {
+				const res = await fetch(url);
+				const data: FetchFull = await res.json();
+				data.status = data.status === "Ok" ? "success" : "error";
+				if (value) {
+					allData[filterType][value] = data;
+					return resolve();
+				}
+				allData[filterType] = data;
+				resolve();
+			} catch (e) {
+				reject(e);
+			}
+		});
+	};
+
+	await Promise.allSettled([
+		fetchData(`${BASE_URL_START}${BASE_URL_END}?${params}`, "initial"),
+		...filters.creators.map((creator) =>
+			fetchData(creator.url, "creators", creator.value)
+		),
+		...filters.characters.map((characters) =>
+			fetchData(characters.url, "characters", characters.value)
+		),
+	]);
 
 	return {
 		props: {
-			buildComics: data?.data?.results || null,
-			buildTotal: data?.data?.total || null,
-			buildStatus: status,
+			buildData: allData,
 		},
 	};
 };

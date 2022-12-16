@@ -22,3 +22,23 @@ export type BuildProps = {
 	buildTotal: number | null;
 	buildStatus: "error" | "success";
 };
+
+export type FetchData = { results: ComicProps[]; total: number };
+
+export type FetchFull = {
+	data?: FetchData;
+	status?: string;
+};
+
+export type BuildObjProps = {
+	data: FetchData;
+	status: "success" | "error";
+};
+
+export type BuildDataProps = {
+	buildData: {
+		initial: BuildObjProps;
+		creators: { [key: string]: BuildObjProps };
+		characters: { [key: string]: BuildObjProps };
+	};
+};
