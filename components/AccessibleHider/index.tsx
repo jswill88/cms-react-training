@@ -1,15 +1,12 @@
 import React, { useRef, useEffect } from "react";
 
 type Props = {
-	children?: React.ReactNode;
 	active: boolean;
-	className?: string;
-};
+	Component?: React.ElementType;
+} & React.HTMLAttributes<HTMLAllCollection>;
 
 export function AccessibleHider(props: Props) {
-	const { active } = props;
-	const otherProps = { ...props };
-	delete otherProps.active;
+	const { active, Component = "div", children, ...otherProps } = props;
 	const ref = useRef(null);
 
 	useEffect(() => {
@@ -30,7 +27,7 @@ export function AccessibleHider(props: Props) {
 					btn.removeAttribute("tabindex");
 				});
 		}
-	}, [active]);
+	}, [active, children]);
 
-	return <div ref={ref} {...otherProps} />;
+	return <Component ref={ref} {...otherProps} children={children} />;
 }

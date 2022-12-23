@@ -1,11 +1,13 @@
 .container {
+	--width: 245px;
 	position: relative;
 	margin-top: 10px;
+	width: var(--width);
 }
 
 .select {
 	display: block;
-	width: 245px;
+	width: var(--width);
 	border-radius: 3px;
 	color: var(--off-white);
 	background-color: var(--gray-dark);

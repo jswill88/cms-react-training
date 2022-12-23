@@ -35,16 +35,15 @@ export default function Nav() {
 			>
 				<FontAwesomeIcon icon="bars" />
 			</button>
-			<AccessibleHider active={active}>
-				<nav className={`${styles.nav} ${active ? styles.show : ""}`}>
-					<Link href="#">Home</Link>
-					<a
-						href="https://www.marvel.com/shop/marvel-must-haves"
-						target="_blank"
-					>
-						Shop
-					</a>
-				</nav>
+			<AccessibleHider
+				active={active}
+				Component={"nav"}
+				className={`${styles.nav} ${active ? styles.show : ""}`}
+			>
+				<Link href="#">Home</Link>
+				<a href="https://www.marvel.com/shop/marvel-must-haves" target="_blank">
+					Shop
+				</a>
 			</AccessibleHider>
 		</div>
 	);
