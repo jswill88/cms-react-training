@@ -10,3 +10,7 @@
 	place-items: center;
 	cursor: pointer;
 }
+
+.container[disabled] {
+	cursor: default;
+}

@@ -25,13 +25,19 @@ export function Pager({ offset, total, setOffset }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<PagerButton onClick={() => handleOffset(false)}>
+			<PagerButton
+				onClick={() => handleOffset(false)}
+				disabled={firstItem === 1}
+			>
 				<FontAwesomeIcon icon="angle-left" />
 			</PagerButton>
 			<span className={styles.text}>
 				{firstItem}-{lastItem} of {total}
 			</span>
-			<PagerButton onClick={() => handleOffset(true)}>
+			<PagerButton
+				onClick={() => handleOffset(true)}
+				disabled={lastItem === total}
+			>
 				<FontAwesomeIcon icon="angle-right" />
 			</PagerButton>
 		</div>
