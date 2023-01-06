@@ -3,7 +3,7 @@ import Button from "./Button";
 import Detail from "./Detail";
 import { ImageWithBlur } from "components";
 import styles from "styles/Comic.module.css";
-import { ComicProps, Date, Creators } from "../../types";
+import { ComicProps, Date as DateType, Creators } from "../../types";
 import { useAppContext } from "state/AppContext";
 
 export function Comic(props: ComicProps) {
@@ -24,10 +24,10 @@ export function Comic(props: ComicProps) {
 		return `${path}/portrait_uncanny.${extension}`;
 	};
 
-	const formattedDate = (dates: Date[]): string => {
+	const formattedDate = (dates: DateType[]): string => {
 		if (!dates || !dates.length) return null;
 		const { date } = dates.find(({ type }) => type === "focDate") || dates[0];
-		const formattedDate = moment(date).format("MMMM Do, YYYY");
+		const formattedDate = moment(new Date(date)).format("MMMM Do, YYYY");
 		return formattedDate === "Invalid date" ? null : formattedDate;
 	};
 
