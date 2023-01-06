@@ -1,0 +1,99 @@
+.container {
+	color: var(--off-white);
+	background-color: var(--gray-dark);
+	width: 100%;
+	padding-inline: 13px;
+	padding-block: 20px 40px;
+	overflow: hidden;
+}
+
+.title {
+	font-family: var(--montserrat);
+	font-weight: 900;
+	font-size: 25px;
+	line-height: calc(30 / 25);
+	letter-spacing: 0.01em;
+	margin-bottom: 0;
+	padding-inline: 17px;
+}
+
+.emptyMessage {
+	font-family: var(--karla);
+	padding-inline: 17px;
+}
+
+.cards {
+	display: grid;
+}
+
+.card {
+	position: relative;
+	padding-top: 17px;
+	padding-left: 17px;
+	display: flex;
+	gap: 10px;
+	margin-top: 30px;
+}
+
+.button {
+	color: var(--red);
+	background-color: rgba(248, 248, 242, 0.8);
+	font-size: 15px;
+	line-height: 1;
+	display: grid;
+	place-items: center;
+	--size: 35px;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+	padding: 0;
+}
+
+.cardTitle {
+	font-size: 14px;
+	font-family: var(--karla);
+	font-weight: 700;
+	line-height: calc(16 / 14);
+	margin-bottom: 4px;
+}
+
+.issue {
+	font-size: 14px;
+	font-family: var(--karla);
+	line-height: calc(17 / 14);
+}
+
+.imgCont {
+	width: 50px;
+	flex-shrink: 0;
+}
+
+@media (min-width: 64em) {
+	.container {
+		padding-top: 29px;
+		padding-inline: 27px 30px;
+	}
+
+	.card {
+		padding-top: 6px;
+		padding-left: 6px;
+		margin-top: 20px;
+	}
+
+	.button {
+		--size: 12px;
+		font-size: 8px;
+	}
+
+	.title {
+		margin-bottom: 12px;
+	}
+
+	.cardTitle {
+		margin-bottom: 5px;
+	}
+}

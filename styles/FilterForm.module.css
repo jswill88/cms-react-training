@@ -1,0 +1,19 @@
+.container {
+	background-color: var(--gray-dark);
+	padding: 15px 20px 13px;
+}
+
+.title {
+	color: var(--off-white);
+	font-family: var(--montserrat);
+	font-size: 14px;
+	line-height: calc(16 / 14);
+	flex-shrink: 0;
+}
+
+@media (min-width: 64em) {
+	.container {
+		display: flex;
+		align-items: center;
+	}
+}
