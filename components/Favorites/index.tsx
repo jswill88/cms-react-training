@@ -54,7 +54,7 @@ export function Favorites() {
 							</div>
 							<div>
 								<h3 className={styles.cardTitle}>{item.title}</h3>
-								{item.issueNumber ? (
+								{item.issueNumber !== undefined ? (
 									<p className={styles.issue}>Issue: {item.issueNumber}</p>
 								) : null}
 							</div>

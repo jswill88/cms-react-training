@@ -9,7 +9,13 @@ type Props = {
 export default function Detail(props: Props) {
 	const { label, value, testId } = props;
 
-	if (!value || (typeof value === "string" && !value.length)) return null;
+	if (
+		value === undefined ||
+		value === null ||
+		(typeof value === "string" && !value.length)
+	) {
+		return null;
+	}
 
 	return (
 		<li className={styles.container} data-testid={testId}>
