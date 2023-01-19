@@ -1,0 +1,45 @@
+.container {
+	margin-bottom: 60px;
+}
+
+.cardGrid {
+	padding-top: 52px;
+	padding-bottom: 30px;
+	display: grid;
+	gap: 30px 20px;
+}
+
+.hideMobile {
+	display: none;
+}
+
+.spinner {
+	width: 116px;
+	display: block;
+	margin: 0 auto;
+}
+
+@media (min-width: 40em) {
+	.cardGrid {
+		grid-template-columns: repeat(auto-fill, minmax(183px, 1fr));
+	}
+}
+
+@media (min-width: 64em) {
+	.container {
+		display: grid;
+		grid-template-columns: 1fr 265px;
+		gap: 60px;
+		margin-bottom: 90px;
+	}
+
+	.cardGrid {
+		gap: 60px 20px;
+		padding-bottom: 80px;
+		padding-top: 40px;
+	}
+
+	.hideMobile {
+		display: block;
+	}
+}

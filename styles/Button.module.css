@@ -1,0 +1,49 @@
+.container {
+	--size: 30px;
+	width: var(--size);
+	height: var(--size);
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	display: grid;
+	place-items: center;
+	background-color: var(--gray-dark);
+	border-radius: 50%;
+	cursor: pointer;
+	transition: background-color var(--transition), border-color var(--transition);
+	box-sizing: border-box;
+}
+
+.favorited {
+	background-color: var(--red);
+	outline: 2px solid var(--off-white);
+}
+
+.icon {
+	color: var(--off-white);
+}
+
+.container:not(.hover):not(.favorited) {
+	cursor: auto;
+}
+
+@media (hover: hover) {
+	.container.hover:hover {
+		outline: 2px solid var(--off-white);
+		background-color: var(--red);
+	}
+
+	.container:hover:before {
+		transform: scale(2);
+	}
+}
+
+@media (min-width: 40em) {
+	.container {
+		top: unset;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
